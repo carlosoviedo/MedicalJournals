@@ -3,6 +3,5 @@
 	"name": "Medical Journal 1",
 	"logo": "https://www.google.com",
 	"tags": ["biology", "cardiology"],
-	"language": "en-GB",
-	"publications": []
+	"language": "en-GB"
 }

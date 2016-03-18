@@ -1,5 +1,6 @@
 package journal.web.resource;
 
+import static journal.web.resource.MedicalJournal.MedicalJournalEndpoints.JOURNAL_URL_PARAM;
 import static journal.web.resource.MedicalJournal.MedicalJournalEndpoints.RESOURCE_COLLECTION;
 import static journal.web.resource.MedicalJournal.MedicalJournalEndpoints.RESOURCE_ITEM;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
@@ -9,10 +10,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
 
+import journal.dao.JournalDao;
+import journal.model.Journal;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,14 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class MedicalJournal {
-	private static final String _allJournalsMockResponse;
-	private static final Map<String, String> _aJournalMockResponses;
-	
-	static {
-		_allJournalsMockResponse = loadMockResponse("allJournals.json");
-		_aJournalMockResponses = loadMockResponses("1111-1111", "1111-2222", "1111-3333", "1111-4444");
-	}
-	
 	static String loadMockResponse(String path) {
 		try (InputStream is = new ClassPathResource(path).getInputStream()) {
 			return new BufferedReader(new InputStreamReader(is), 1024)
@@ -44,23 +38,29 @@ public class MedicalJournal {
 		}
 	}
 	
-	static Map<String, String> loadMockResponses(String... issns) {
-		Map<String, String> mockResponses = new HashMap<>(issns.length+1);
-		MessageFormat fileNameFormatter = new MessageFormat("aJournal_{0}.json");
-		for (String issn : issns) {
-			mockResponses.put(issn, loadMockResponse(fileNameFormatter.format(new Object[]{issn})));
-		}
-		return mockResponses;
+	private JournalDao journalDao;
+	
+	@Autowired
+	public MedicalJournal(JournalDao journalDao) {
+		this.journalDao = journalDao;
 	}
 
 	@RequestMapping(path=RESOURCE_COLLECTION, method=GET, produces=APPLICATION_JSON_UTF8_VALUE)
-	String allJournals() {
-		return _allJournalsMockResponse;
+	Iterable<Journal> allJournals() {
+		Iterable<Journal> results = journalDao.findAll();
+		results.forEach(journal -> journal.setUrl(generateUrlFrom(journal)));
+		return results;
 	}
 
 	@RequestMapping(path=RESOURCE_ITEM, method=GET, produces=APPLICATION_JSON_UTF8_VALUE)
-	String aJournal(@PathVariable String journalId) {
-		return _aJournalMockResponses.get(journalId);
+	Journal aJournal(@PathVariable String journalId) {
+		Journal journal = journalDao.findByIssn(journalId); 
+		journal.setUrl(generateUrlFrom(journal));
+		return journal;
+	}
+	
+	private static String generateUrlFrom(Journal journal) {
+		return RESOURCE_ITEM.replace(JOURNAL_URL_PARAM, journal.getIssn());
 	}
 	
 	static class MedicalJournalEndpoints {

@@ -3,6 +3,5 @@
 	"name": "Medical Journal 4",
 	"logo": "https://www.google.com",
 	"tags": ["neurology", "oncology"],
-	"language": "en-US",
-	"publications": []
+	"language": "en-US"
 }

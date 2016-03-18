@@ -21,6 +21,8 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.data:spring-data-commons:1.11.4.RELEASE")
+    compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final")
     
     runtime("org.springframework.boot:spring-boot-starter-actuator")
     runtime("org.springframework.boot:spring-boot-starter-data-jpa")
