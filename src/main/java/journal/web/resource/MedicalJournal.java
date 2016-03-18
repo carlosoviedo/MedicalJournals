@@ -64,8 +64,10 @@ public class MedicalJournal {
 	}
 	
 	static class MedicalJournalEndpoints {
+		static final String JSON_EXTENSION = ".json";
 		static final String JOURNAL_URL_PARAM = "{journalId}";
-		static final String RESOURCE_COLLECTION = "/journals";
-		static final String RESOURCE_ITEM = RESOURCE_COLLECTION + "/" + JOURNAL_URL_PARAM;
+		static final String RESOURCE_BASE = "/journals";
+		static final String RESOURCE_COLLECTION = RESOURCE_BASE + JSON_EXTENSION;
+		static final String RESOURCE_ITEM = RESOURCE_BASE + "/" + JOURNAL_URL_PARAM + JSON_EXTENSION;
 	}
 }

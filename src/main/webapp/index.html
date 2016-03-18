@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" ng-app="medicalJournalApp">
+<head>
+  <meta charset="utf-8">
+  <title>Medical Journals</title>
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="/js/angular/angular.js"></script>
+  <script src="js/controllers.js"></script>
+</head>
+<body ng-controller="MedicalJournalCtrl">
+  <div class="container-fluid">
+  <h4>Medical Journals</h4>
+    <div class="row">
+      <div class="col-md-4">
+        Search: <input ng-model="query">
+        Sort by:
+        <select ng-model="orderProp">
+          <option value="name">Alphabetical</option>
+          <option value="language">Language</option>
+        </select>
+
+      </div>
+      <div class="col-md-10">
+        <ul class="journals">
+          <li ng-repeat="journal in journals | filter:query | orderBy:orderProp">
+            <a href="{{journal.url}}">{{journal.name}}</a>
+           	<div>{{journal.tags.join(', ')}}</div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

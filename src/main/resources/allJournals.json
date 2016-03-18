@@ -5,7 +5,7 @@
 		"logo": "https://www.google.com",
 		"tags": ["biology", "cardiology"],
 		"language": "en-GB",
-		"url": "/journals/1111-1111"
+		"url": "/journals/1111-1111.json"
 	},
 	{
 		"issn": "1111-2222",
@@ -13,7 +13,7 @@
 		"logo": "https://www.google.com",
 		"tags": ["endocrinology", "infectious diseases"],
 		"language": "es-AR",
-		"url": "/journals/1111-2222"
+		"url": "/journals/1111-2222.json"
 	},
 	{
 		"issn": "1111-3333",
@@ -21,7 +21,7 @@
 		"logo": "https://www.google.com",
 		"tags": ["genetics", "microbiology"],
 		"language": "es-MX",
-		"url": "/journals/1111-3333"
+		"url": "/journals/1111-3333.json"
 	},
 	{
 		"issn": "1111-4444",
@@ -29,6 +29,6 @@
 		"logo": "https://www.google.com",
 		"tags": ["neurology", "oncology"],
 		"language": "en-US",
-		"url": "/journals/1111-4444"
+		"url": "/journals/1111-4444.json"
 	}
 ]
