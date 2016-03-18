@@ -4,3 +4,6 @@ body {
   padding-top: 20px;
 }
 
+p.error, input[type="submit"] {
+	margin-top: 12px;
+}

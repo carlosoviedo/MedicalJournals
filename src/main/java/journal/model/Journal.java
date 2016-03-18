@@ -32,7 +32,7 @@ public class Journal {
 	@Transient
 	private String url;
 	
-	protected Journal() {}	// Required by JPA provider when creating instances of this class
+	public Journal() {}
 	
 	public Journal(String issn, String name, String language) {
 		this(issn, name, language, null, null);
@@ -52,17 +52,32 @@ public class Journal {
 	public String getIssn() {
 		return issn;
 	}
+	public void setIssn(String issn) {
+		this.issn = issn;
+	}
 	public String getName() {
 		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getLogo() {
 		return logo;
 	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
 	public String[] getTags() {
-		return tags.split("\\s*,\\s*");
+		return tags != null && tags.length() > 0 ? tags.split("\\s*,\\s*") : new String[0];
+	}
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 	public String getLanguage() {
 		return language;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 	public String getUrl() {
 		return url;
