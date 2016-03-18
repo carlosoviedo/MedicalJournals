@@ -21,14 +21,14 @@
         </select>
 
       </div>
-      <div class="col-md-10">
-        <ul class="journals">
+      <div class="col-md-10" ng-model="journals">
+        <ul class="journals" ng-show="journals.length > 0">
           <li ng-repeat="journal in journals | filter:query | orderBy:orderProp">
             <a href="{{journal.url}}">{{journal.name}}</a>
            	<div>{{journal.tags.join(', ')}}</div>
           </li>
         </ul>
-
+        <p class="error" ng-show="journals.length == 0">No journals</p>
       </div>
     </div>
   </div>

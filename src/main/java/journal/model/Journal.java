@@ -1,10 +1,12 @@
 package journal.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Journal {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="JOURNAL_ID")
 	@JsonIgnore
 	private long id;
 	
@@ -25,6 +28,8 @@ public class Journal {
 	private String logo;
 	private String tags;
 	private String language;
+	
+	@Transient
 	private String url;
 	
 	protected Journal() {}	// Required by JPA provider when creating instances of this class
